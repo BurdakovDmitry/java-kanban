@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Epic extends Task {
     ArrayList<Subtask> listSubtask;
@@ -18,13 +19,29 @@ public class Epic extends Task {
             return StatusTask.NEW;
         }
 
-        for (Subtask subtask : listSubtask) {
-            if (subtask.getStatusTask().equals(StatusTask.NEW)) {
-                return StatusTask.NEW;
-            } else if (subtask.getStatusTask().equals(StatusTask.DONE)) {
-                return StatusTask.DONE;
-            }
+        if (statusNew(listSubtask)) {
+            return StatusTask.NEW;
+        } else if (statusDone(listSubtask)) {
+            return StatusTask.DONE;
         }
         return StatusTask.IN_PROGRESS;
+    }
+
+    public boolean statusNew(ArrayList<Subtask> list) {
+        for (Subtask subtask : list) {
+            if (!Objects.equals(subtask.getStatusTask(), StatusTask.NEW)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean statusDone(ArrayList<Subtask> list) {
+        for (Subtask subtask : list) {
+            if (!subtask.getStatusTask().equals(StatusTask.DONE)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
