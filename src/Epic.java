@@ -27,7 +27,7 @@ public class Epic extends Task {
         return StatusTask.IN_PROGRESS;
     }
 
-    public boolean statusNew(ArrayList<Subtask> list) {
+    private boolean statusNew(ArrayList<Subtask> list) {
         for (Subtask subtask : list) {
             if (!Objects.equals(subtask.getStatusTask(), StatusTask.NEW)) {
                 return false;
@@ -36,7 +36,7 @@ public class Epic extends Task {
         return true;
     }
 
-    public boolean statusDone(ArrayList<Subtask> list) {
+    private boolean statusDone(ArrayList<Subtask> list) {
         for (Subtask subtask : list) {
             if (!subtask.getStatusTask().equals(StatusTask.DONE)) {
                 return false;

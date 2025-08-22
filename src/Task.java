@@ -1,6 +1,6 @@
 public class Task {
-    private final String nameTask;
-    private final String description;
+    private String nameTask;
+    private String description;
     private int id;
     private StatusTask statusTask = StatusTask.NEW;
 
@@ -24,8 +24,16 @@ public class Task {
         this.statusTask = statusTask;
     }
 
+    public void setNameTask(String nameTask) {
+        this.nameTask = nameTask;
+    }
+
     public String getNameTask() {
         return nameTask;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getDescription() {
