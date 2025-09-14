@@ -2,9 +2,10 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class TaskImplimentationTest {
     static TaskManager taskManager;
@@ -76,12 +77,12 @@ class TaskImplimentationTest {
         Task task2 = new Task("Task2", "Description1");
         taskManager.createTask(task2);
 
-        final ArrayList<Task> tasks1 = taskManager.getListTask();
+        final List<Task> tasks1 = taskManager.getListTask();
         assertEquals(2, tasks1.size(), "Задач должно быть 2");
 
         taskManager.removeTaskById(task2.getId());
 
-        final ArrayList<Task> tasks2 = taskManager.getListTask();
+        final List<Task> tasks2 = taskManager.getListTask();
         assertEquals(1, tasks2.size(), "Задача должна удалиться");
     }
 
@@ -91,12 +92,12 @@ class TaskImplimentationTest {
         subtask2.setIdEpic(epic.getId());
         taskManager.createSubtask(subtask2);
 
-        final ArrayList<Subtask> subtasks1 = taskManager.getListSubtask();
+        final List<Subtask> subtasks1 = taskManager.getListSubtask();
         assertEquals(2, subtasks1.size(), "Задач должно быть 2");
 
         taskManager.removeSubtaskById(subtask2.getId());
 
-        final ArrayList<Subtask> subtasks2 = taskManager.getListSubtask();
+        final List<Subtask> subtasks2 = taskManager.getListSubtask();
         assertEquals(1, subtasks2.size(), "Задача должна удалиться");
     }
 
@@ -109,16 +110,16 @@ class TaskImplimentationTest {
         subtask3.setIdEpic(epic2.getId());
         taskManager.createSubtask(subtask3);
 
-        final ArrayList<Epic> epics1 = taskManager.getListEpic();
-        final ArrayList<Subtask> subtasks1 = taskManager.getListSubtask();
+        final List<Epic> epics1 = taskManager.getListEpic();
+        final List<Subtask> subtasks1 = taskManager.getListSubtask();
 
         assertEquals(2, epics1.size(), "Задач должно быть 2");
         assertEquals(2, subtasks1.size(), "Задач должно быть 2");
 
         taskManager.removeEpicById(epic2.getId());
 
-        final ArrayList<Epic> epics2 = taskManager.getListEpic();
-        final ArrayList<Subtask> subtasks2 = taskManager.getListSubtask();
+        final List<Epic> epics2 = taskManager.getListEpic();
+        final List<Subtask> subtasks2 = taskManager.getListSubtask();
 
         assertEquals(1, epics2.size(), "Задача должна удалиться");
         assertEquals(1, subtasks2.size(), "Задача должна удалиться");
@@ -126,7 +127,7 @@ class TaskImplimentationTest {
 
     @Test
     void getListSubtaskToEpic() {
-        final ArrayList<Subtask> subtasks = taskManager.getListSubtaskToEpic(epic.getId());
+        final List<Subtask> subtasks = taskManager.getListSubtaskToEpic(epic.getId());
 
         assertNotNull(subtasks, "В списке должна бить задача");
         assertEquals(1, subtasks.size(),"В списке должна бить 1 задача");

@@ -1,15 +1,16 @@
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.List;
 
 public class Epic extends Task {
-    ArrayList<Subtask> listSubtask;
+    List<Subtask> listSubtask;
 
     public Epic(String nameTask, String description) {
         super(nameTask, description);
         listSubtask = new ArrayList<>();
     }
 
-    public ArrayList<Subtask> getListSubtask() {
+    public List<Subtask> getListSubtask() {
         return listSubtask;
     }
 
@@ -27,7 +28,7 @@ public class Epic extends Task {
         return StatusTask.IN_PROGRESS;
     }
 
-    private boolean statusNew(ArrayList<Subtask> list) {
+    private boolean statusNew(List<Subtask> list) {
         for (Subtask subtask : list) {
             if (!Objects.equals(subtask.getStatusTask(), StatusTask.NEW)) {
                 return false;
@@ -36,7 +37,7 @@ public class Epic extends Task {
         return true;
     }
 
-    private boolean statusDone(ArrayList<Subtask> list) {
+    private boolean statusDone(List<Subtask> list) {
         for (Subtask subtask : list) {
             if (!subtask.getStatusTask().equals(StatusTask.DONE)) {
                 return false;

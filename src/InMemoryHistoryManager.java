@@ -1,7 +1,8 @@
+import java.util.List;
 import java.util.ArrayList;
 
 public class InMemoryHistoryManager implements HistoryManager {
-    ArrayList<Task> listHistory = new ArrayList<>();
+    List<Task> listHistory = new ArrayList<>();
 
     @Override
     public void add(Task task){
@@ -12,7 +13,7 @@ public class InMemoryHistoryManager implements HistoryManager {
     }
 
     @Override
-    public ArrayList<Task> getHistory() {
+    public List<Task> getHistory() {
         return listHistory;
     }
 }

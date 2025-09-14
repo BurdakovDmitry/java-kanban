@@ -1,12 +1,14 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
+import java.util.Map;
 
 public class TaskImplimentation implements TaskManager {
     public static int id = 1;
-    public static HashMap<Integer, Task> tasks = new HashMap<>();
-    public static HashMap<Integer, Subtask> subtasks = new HashMap<>();
-    public static HashMap<Integer, Epic> epics = new HashMap<>();
-    public static HistoryManager listHistory = Managers.getDefaultHistory();
+    public static Map<Integer, Task> tasks = new HashMap<>();
+    public static Map<Integer, Subtask> subtasks = new HashMap<>();
+    public static Map<Integer, Epic> epics = new HashMap<>();
+    public static HistoryManager historyManager = Managers.getDefaultHistory();
 
 
     @Override
@@ -55,35 +57,35 @@ public class TaskImplimentation implements TaskManager {
     }
 
     @Override
-    public ArrayList<Task> getListTask() {
+    public List<Task> getListTask() {
         return new ArrayList<>(tasks.values());
     }
 
     @Override
-    public ArrayList<Epic> getListEpic() {
+    public List<Epic> getListEpic() {
         return new ArrayList<>(epics.values());
     }
 
     @Override
-    public ArrayList<Subtask> getListSubtask() {
+    public List<Subtask> getListSubtask() {
         return new ArrayList<>(subtasks.values());
     }
 
     @Override
     public Task getTaskById(int idTask) {
-        listHistory.add(tasks.get(idTask));
+        historyManager.add(tasks.get(idTask));
         return tasks.get(idTask);
     }
 
     @Override
     public Epic getEpicById(int idEpic) {
-        listHistory.add(epics.get(idEpic));
+        historyManager.add(epics.get(idEpic));
         return epics.get(idEpic);
     }
 
     @Override
     public Subtask getSubtaskById(int idSubtask) {
-        listHistory.add(subtasks.get(idSubtask));
+        historyManager.add(subtasks.get(idSubtask));
         return subtasks.get(idSubtask);
     }
 
@@ -120,13 +122,13 @@ public class TaskImplimentation implements TaskManager {
     }
 
     @Override
-    public ArrayList<Subtask> getListSubtaskToEpic(int idEpic) {
+    public List<Subtask> getListSubtaskToEpic(int idEpic) {
         return new ArrayList<>(epics.get(idEpic).getListSubtask());
     }
 
 
-    public ArrayList<Task> getHistory() {
-        return listHistory.getHistory();
+    public List<Task> getHistory() {
+        return historyManager.getHistory();
     }
 }
 

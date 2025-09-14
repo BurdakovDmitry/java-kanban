@@ -2,9 +2,10 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class EpicTest {
     static TaskManager taskManager;
@@ -40,7 +41,7 @@ class EpicTest {
         assertNotNull(savedEpic, "Задача не найдена.");
         assertEquals(epic, savedEpic, "Задачи не совпадают.");
 
-        final ArrayList<Epic> epics = taskManager.getListEpic();
+        final List<Epic> epics = taskManager.getListEpic();
 
         assertNotNull(epics, "Задачи не записываются.");
         assertEquals(1, epics.size(), "Неверное количество задач.");
@@ -49,7 +50,7 @@ class EpicTest {
 
     @Test
     void addSubtaskToListSubtasksToEpic() {
-        final ArrayList<Subtask> subtasks = epic.getListSubtask();
+        final List<Subtask> subtasks = epic.getListSubtask();
 
         assertNotNull(subtasks, "Задачи не записываются.");
         assertEquals(2, subtasks.size(), "Неверное количество задач.");
@@ -89,7 +90,7 @@ class EpicTest {
 
     @AfterAll
     static void StatusEpicNewIfListSubtaskNull() {
-        final ArrayList<Subtask> subtasks = epic.getListSubtask();
+        final List<Subtask> subtasks = epic.getListSubtask();
         subtasks.clear();
 
         assertEquals(StatusTask.NEW, epic.getStatusTask(), "Статусы не совпадают.");

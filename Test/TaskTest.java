@@ -1,9 +1,10 @@
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class TaskTest {
     static TaskManager taskManager = Managers.getDefault();
@@ -24,7 +25,7 @@ class TaskTest {
         assertNotNull(savedTask, "Задача не найдена.");
         assertEquals(task, savedTask, "Задачи не совпадают.");
 
-        final ArrayList<Task> tasks = taskManager.getListTask();
+        final List<Task> tasks = taskManager.getListTask();
 
         assertNotNull(tasks, "Задачи не записываются.");
         assertEquals(1, tasks.size(), "Неверное количество задач.");
