@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class InMemoryHistoryManager implements HistoryManager {
-    private Node<Task> head;
-    private Node<Task> tail;
+    private Node head;
+    private Node tail;
     private int size = 0;
-    Map<Integer, Node<Task>> mapNote = new HashMap<>();
+    Map<Integer, Node> mapNote = new HashMap<>();
 
 
     @Override
@@ -28,10 +28,10 @@ public class InMemoryHistoryManager implements HistoryManager {
         return getTasks();
     }
 
-    private static class Node<Task> {
+    private static class Node {
         public Task task;
-        public Node<Task> next;
-        public Node<Task> prev;
+        public Node next;
+        public Node prev;
 
         public Node(Task task) {
             this.task = task;
@@ -41,7 +41,7 @@ public class InMemoryHistoryManager implements HistoryManager {
     }
 
     private void linkLast(Task task) {
-        Node<Task> newNode = new Node<>(task);
+        Node newNode = new Node(task);
 
         mapNote.put(task.getId(), newNode);
         size++;
@@ -57,7 +57,7 @@ public class InMemoryHistoryManager implements HistoryManager {
 
     private List<Task> getTasks() {
         List<Task> listHistory = new ArrayList<>();
-        Node<Task> node = head;
+        Node node = head;
         while (node != null) {
             listHistory.add(node.task);
             node = node.next;
@@ -65,7 +65,7 @@ public class InMemoryHistoryManager implements HistoryManager {
         return listHistory;
     }
 
-    private void removeNode(Node<Task> node) {
+    private void removeNode(Node node) {
         if (node == null) {
             return;
         }
@@ -83,8 +83,8 @@ public class InMemoryHistoryManager implements HistoryManager {
                 tail.next = null;
             }
         } else {
-            Node<Task> prevNode = node.prev;
-            Node<Task> nextNode = node.next;
+            Node prevNode = node.prev;
+            Node nextNode = node.next;
 
             prevNode.next = nextNode;
             nextNode.prev = prevNode;
