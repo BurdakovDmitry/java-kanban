@@ -91,11 +91,23 @@ public class TaskImplimentation implements TaskManager {
 
     @Override
     public void removeAllTask() {
+        for (Task task : tasks.values()) {
+            historyManager.remove(task.getId());
+        }
+
         tasks.clear();
     }
 
     @Override
     public void removeAllEpic() {
+        for (Subtask subtask : subtasks.values()) {
+            historyManager.remove(subtask.getId());
+        }
+
+        for (Epic epic : epics.values()) {
+            historyManager.remove(epic.getId());
+        }
+
         epics.clear();
         subtasks.clear();
     }
@@ -103,15 +115,18 @@ public class TaskImplimentation implements TaskManager {
     @Override
     public void removeTaskById(int idTask) {
         tasks.remove(idTask);
+        historyManager.remove(idTask);
     }
 
     @Override
     public void removeEpicById(int idEpic) {
         for (Subtask subtask : epics.get(idEpic).getListSubtask()) {
             subtasks.remove(subtask.getId());
+            historyManager.remove(subtask.getId());
         }
 
         epics.remove(idEpic);
+        historyManager.remove(idEpic);
     }
 
     @Override
@@ -119,6 +134,7 @@ public class TaskImplimentation implements TaskManager {
         epics.get(subtasks.get(idSubtask).getIdEpic()).listSubtask.remove(subtasks.get(idSubtask));
         epics.get(subtasks.get(idSubtask).getIdEpic()).getStatusTask();
         subtasks.remove(idSubtask);
+        historyManager.remove(idSubtask);
     }
 
     @Override
