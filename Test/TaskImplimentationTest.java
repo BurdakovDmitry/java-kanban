@@ -145,4 +145,9 @@ class TaskImplimentationTest {
         assertEquals(0, TaskImplimentation.epics.size(), "Список эпиков не пуст");
         assertEquals(0, TaskImplimentation.subtasks.size(), "Список подзадач не пуст");
     }
+
+    @AfterAll
+    static void updateStaticVariable() {
+        TaskImplimentation.id = 1;
+    }
 }

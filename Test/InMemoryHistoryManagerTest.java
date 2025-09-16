@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -86,5 +87,11 @@ class InMemoryHistoryManagerTest {
 
         assertEquals(1, listHistoryRemove.size(), "После удаления задачи, длина списка уменьшается");
         assertEquals(task2, taskTest3, "Задачи должны совпадать");
+    }
+
+    @AfterAll
+    static void updateStaticVariable() {
+        TaskImplimentation.id = 1;
+        TaskImplimentation.tasks.clear();
     }
 }

@@ -147,4 +147,3 @@ public class TaskImplimentation implements TaskManager {
         return historyManager.getHistory();
     }
 }
-

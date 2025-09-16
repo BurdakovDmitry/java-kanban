@@ -35,7 +35,8 @@ class TaskTest {
     }
 
     @AfterAll
-    static void removeAllTask() {
-        taskManager.removeAllTask();
+    static void updateStaticVariable() {
+        TaskImplimentation.id = 1;
+        TaskImplimentation.tasks.clear();
     }
 }
