@@ -136,13 +136,13 @@ class TaskImplimentationTest {
     @AfterAll
     static void removeAllTask() {
         taskManager.removeAllTask();
-        assertEquals(0, TaskImplimentation.tasks.size(), "Список задач не пуст");
+        assertEquals(0, taskManager.getListTask().size(), "Список задач не пуст");
     }
 
     @AfterAll
     static void removeAllEpic() {
         taskManager.removeAllEpic();
-        assertEquals(0, TaskImplimentation.epics.size(), "Список эпиков не пуст");
-        assertEquals(0, TaskImplimentation.subtasks.size(), "Список подзадач не пуст");
+        assertEquals(0, taskManager.getListEpic().size(), "Список эпиков не пуст");
+        assertEquals(0, taskManager.getListSubtask().size(), "Список подзадач не пуст");
     }
 }

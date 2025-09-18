@@ -39,12 +39,10 @@ public class Main {
         manager.getTaskById(1);
         manager.getTaskById(2);
         manager.getEpicById(3);
-        manager.getEpicById(6);
         manager.getSubtaskById(4);
         manager.getSubtaskById(5);
         manager.getSubtaskById(4);
-        manager.getSubtaskById(7);
-        manager.getSubtaskById(4);
+        manager.getEpicById(3);
 
         for (Task task : manager.getHistory()) {
             System.out.println(task.getNameTask());
@@ -52,7 +50,7 @@ public class Main {
 
         System.out.println("___".repeat(20));
 
-        manager.getSubtaskById(4);
+        manager.removeAllTask();
 
         for (Task task : manager.getHistory()) {
             System.out.println(task.getNameTask());

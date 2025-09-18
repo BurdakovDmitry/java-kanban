@@ -13,8 +13,8 @@ class ManagersTest {
 
     @Test
     void HistoryManagerGetDefaultHistoryNotNull() {
-        HistoryManager listHistory = Managers.getDefaultHistory();
+        HistoryManager historyManager = Managers.getDefaultHistory();
 
-        assertNotNull(listHistory, "Объект должен быть проинициализирован");
+        assertNotNull(historyManager, "Объект должен быть проинициализирован");
     }
 }
