@@ -6,9 +6,7 @@ import java.util.ArrayList;
 public class InMemoryHistoryManager implements HistoryManager {
     private Node head;
     private Node tail;
-    private int size = 0;
-    Map<Integer, Node> mapNote = new HashMap<>();
-
+    private final Map<Integer, Node> mapNote = new HashMap<>();
 
     @Override
     public void add(Task task) {
@@ -44,7 +42,6 @@ public class InMemoryHistoryManager implements HistoryManager {
         Node newNode = new Node(task);
 
         mapNote.put(task.getId(), newNode);
-        size++;
 
         if (head == null) {
             head = newNode;

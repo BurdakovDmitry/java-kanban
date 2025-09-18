@@ -4,12 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TaskImplimentation implements TaskManager {
-    public static int id = 1;
-    public static Map<Integer, Task> tasks = new HashMap<>();
-    public static Map<Integer, Subtask> subtasks = new HashMap<>();
-    public static Map<Integer, Epic> epics = new HashMap<>();
-    public static HistoryManager historyManager = Managers.getDefaultHistory();
-
+    public int id = 1;
+    public Map<Integer, Task> tasks = new HashMap<>();
+    public Map<Integer, Subtask> subtasks = new HashMap<>();
+    public Map<Integer, Epic> epics = new HashMap<>();
+    public HistoryManager historyManager = Managers.getDefaultHistory();
 
     @Override
     public void createTask(Task task) {
@@ -141,7 +140,6 @@ public class TaskImplimentation implements TaskManager {
     public List<Subtask> getListSubtaskToEpic(int idEpic) {
         return new ArrayList<>(epics.get(idEpic).getListSubtask());
     }
-
 
     public List<Task> getHistory() {
         return historyManager.getHistory();

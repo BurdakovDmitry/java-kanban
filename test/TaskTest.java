@@ -1,4 +1,3 @@
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -32,11 +31,5 @@ class TaskTest {
         assertEquals(task, tasks.getFirst(), "Задачи не совпадают.");
 
         assertEquals(StatusTask.NEW, task.getStatusTask(), "Статусы не совпадают.");
-    }
-
-    @AfterAll
-    static void updateStaticVariable() {
-        TaskImplimentation.id = 1;
-        TaskImplimentation.tasks.clear();
     }
 }

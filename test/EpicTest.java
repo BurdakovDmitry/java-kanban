@@ -95,12 +95,4 @@ class EpicTest {
 
         assertEquals(StatusTask.NEW, epic.getStatusTask(), "Статусы не совпадают.");
     }
-
-    @AfterAll
-    static void updateStaticVariable() {
-        TaskImplimentation.id = 1;
-        TaskImplimentation.tasks.clear();
-        TaskImplimentation.subtasks.clear();
-        TaskImplimentation.epics.clear();
-    }
 }
