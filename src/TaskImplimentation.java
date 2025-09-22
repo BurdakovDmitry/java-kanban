@@ -4,12 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TaskImplimentation implements TaskManager {
-    public static int id = 1;
-    public static Map<Integer, Task> tasks = new HashMap<>();
-    public static Map<Integer, Subtask> subtasks = new HashMap<>();
-    public static Map<Integer, Epic> epics = new HashMap<>();
-    public static HistoryManager historyManager = Managers.getDefaultHistory();
-
+    public int id = 1;
+    public Map<Integer, Task> tasks = new HashMap<>();
+    public Map<Integer, Subtask> subtasks = new HashMap<>();
+    public Map<Integer, Epic> epics = new HashMap<>();
+    public HistoryManager historyManager = Managers.getDefaultHistory();
 
     @Override
     public void createTask(Task task) {
@@ -91,11 +90,23 @@ public class TaskImplimentation implements TaskManager {
 
     @Override
     public void removeAllTask() {
+        for (Task task : tasks.values()) {
+            historyManager.remove(task.getId());
+        }
+
         tasks.clear();
     }
 
     @Override
     public void removeAllEpic() {
+        for (Subtask subtask : subtasks.values()) {
+            historyManager.remove(subtask.getId());
+        }
+
+        for (Epic epic : epics.values()) {
+            historyManager.remove(epic.getId());
+        }
+
         epics.clear();
         subtasks.clear();
     }
@@ -103,15 +114,18 @@ public class TaskImplimentation implements TaskManager {
     @Override
     public void removeTaskById(int idTask) {
         tasks.remove(idTask);
+        historyManager.remove(idTask);
     }
 
     @Override
     public void removeEpicById(int idEpic) {
         for (Subtask subtask : epics.get(idEpic).getListSubtask()) {
             subtasks.remove(subtask.getId());
+            historyManager.remove(subtask.getId());
         }
 
         epics.remove(idEpic);
+        historyManager.remove(idEpic);
     }
 
     @Override
@@ -119,6 +133,7 @@ public class TaskImplimentation implements TaskManager {
         epics.get(subtasks.get(idSubtask).getIdEpic()).listSubtask.remove(subtasks.get(idSubtask));
         epics.get(subtasks.get(idSubtask).getIdEpic()).getStatusTask();
         subtasks.remove(idSubtask);
+        historyManager.remove(idSubtask);
     }
 
     @Override
@@ -126,9 +141,7 @@ public class TaskImplimentation implements TaskManager {
         return new ArrayList<>(epics.get(idEpic).getListSubtask());
     }
 
-
     public List<Task> getHistory() {
         return historyManager.getHistory();
     }
 }
-
