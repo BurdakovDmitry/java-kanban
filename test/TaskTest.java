@@ -10,7 +10,7 @@ class TaskTest {
 
     @Test
     void createNewTask() {
-        Task task = new Task("Task1", "Description1");
+        Task task = new Task("Task1", StatusTask.NEW, "Description1");
         taskManager.createTask(task);
 
         assertEquals("Task1", task.getNameTask(), "Имя должно совпадать");

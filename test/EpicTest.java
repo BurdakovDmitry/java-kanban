@@ -17,15 +17,15 @@ class EpicTest {
     @BeforeAll
     static void beforeAll() {
         taskManager = Managers.getDefault();
-        epic = new Epic("Epic1", "Description1");
+        epic = new Epic("Epic1", StatusTask.NEW,"Description1");
         taskManager.createEpic(epic);
         epicId = epic.getId();
 
-        subtask1 = new Subtask("Subtask1", "Description1");
+        subtask1 = new Subtask("Subtask1", StatusTask.NEW, "Description1");
         subtask1.setIdEpic(epic.getId());
         taskManager.createSubtask(subtask1);
 
-        subtask2 = new Subtask("Subtask2", "Description1");
+        subtask2 = new Subtask("Subtask2", StatusTask.NEW, "Description1");
         subtask2.setIdEpic(epic.getId());
         taskManager.createSubtask(subtask2);
     }
