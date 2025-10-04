@@ -86,19 +86,19 @@ public class FileBackedTaskManager extends TaskImplimentation {
                 writer.write("id,type,name,status,description,epic\n");
             }
 
-            if(!tasks.isEmpty()) {
+            if (!tasks.isEmpty()) {
                 for (Task task : getListTask()) {
                     writer.write(toString(task));
                 }
             }
 
-            if(!epics.isEmpty()) {
+            if (!epics.isEmpty()) {
                 for (Task task : getListEpic()) {
                     writer.write(toString(task));
                 }
             }
 
-            if(!subtasks.isEmpty()) {
+            if (!subtasks.isEmpty()) {
                 for (Task task : getListSubtask()) {
                     writer.write(toString(task));
                 }
