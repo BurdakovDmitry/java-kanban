@@ -16,13 +16,13 @@ class TaskImplimentationTest {
     @BeforeAll
     static void beforeAll() {
         taskManager = Managers.getDefault();
-        task = new Task("Task1", "Description1");
+        task = new Task("Task1", StatusTask.NEW, "Description1");
         taskManager.createTask(task);
 
-        epic = new Epic("Epic1", "Description1");
+        epic = new Epic("Epic1", StatusTask.NEW, "Description1");
         taskManager.createEpic(epic);
 
-        subtask = new Subtask("Subtask1", "Description1");
+        subtask = new Subtask("Subtask1", StatusTask.NEW, "Description1");
         subtask.setIdEpic(epic.getId());
         taskManager.createSubtask(subtask);
     }
@@ -74,7 +74,7 @@ class TaskImplimentationTest {
 
     @Test
     void removeTaskById() {
-        Task task2 = new Task("Task2", "Description1");
+        Task task2 = new Task("Task2", StatusTask.NEW, "Description1");
         taskManager.createTask(task2);
 
         final List<Task> tasks1 = taskManager.getListTask();
@@ -88,7 +88,7 @@ class TaskImplimentationTest {
 
     @Test
     void removeSubtaskById() {
-        Subtask subtask2 = new Subtask("Subtask2", "Description1");
+        Subtask subtask2 = new Subtask("Subtask2", StatusTask.NEW, "Description1");
         subtask2.setIdEpic(epic.getId());
         taskManager.createSubtask(subtask2);
 
@@ -103,10 +103,10 @@ class TaskImplimentationTest {
 
     @Test
     void removeEpicById() {
-        Epic epic2 = new Epic("Epic2", "Description1");
+        Epic epic2 = new Epic("Epic2", StatusTask.NEW, "Description1");
         taskManager.createEpic(epic2);
 
-        Subtask subtask3 = new Subtask("Subtask2", "Description1");
+        Subtask subtask3 = new Subtask("Subtask2", StatusTask.NEW, "Description1");
         subtask3.setIdEpic(epic2.getId());
         taskManager.createSubtask(subtask3);
 
