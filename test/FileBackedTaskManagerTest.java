@@ -47,7 +47,7 @@ class FileBackedTaskManagerTest {
     }
 
     @Test
-    void loadingTaskFile() throws IOException {
+    void loadingTaskFile() {
         FileBackedTaskManager manager = new FileBackedTaskManager(file);
         manager.createTask(task);
 
