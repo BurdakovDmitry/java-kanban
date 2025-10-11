@@ -12,7 +12,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class TaskImplimentationTest {
+class InMemoryTaskManagerTest {
     static TaskManager taskManager;
     static Task task;
     static Epic epic;

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TaskImplimentation implements TaskManager {
+public class InMemoryTaskManager implements TaskManager {
     public int id = 1;
     public Map<Integer, Task> tasks = new HashMap<>();
     public Map<Integer, Subtask> subtasks = new HashMap<>();
