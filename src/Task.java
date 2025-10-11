@@ -55,4 +55,9 @@ public class Task {
     public int hashCode() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%d,%s,%s,%s,%s\n", id, TypeTask.TASK, nameTask, statusTask, description);
+    }
 }

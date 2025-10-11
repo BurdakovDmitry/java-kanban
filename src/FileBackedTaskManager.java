@@ -80,46 +80,34 @@ public class FileBackedTaskManager extends TaskImplimentation {
     }
 
     private void save() {
+        String header = "id,type,name,status,description,epic\n";
+
         try (FileWriter writer = new FileWriter(file, StandardCharsets.UTF_8)) {
 
             if (file.length() == 0) {
-                writer.write("id,type,name,status,description,epic\n");
+                writer.write(header);
             }
 
             if (!tasks.isEmpty()) {
                 for (Task task : getListTask()) {
-                    writer.write(toString(task));
+                    writer.write(task.toString());
                 }
             }
 
             if (!epics.isEmpty()) {
                 for (Task task : getListEpic()) {
-                    writer.write(toString(task));
+                    writer.write(task.toString());
                 }
             }
 
             if (!subtasks.isEmpty()) {
                 for (Task task : getListSubtask()) {
-                    writer.write(toString(task));
+                    writer.write(task.toString());
                 }
             }
 
         } catch (IOException e) {
             throw new ManagerSaveException("Произошла ошибка во время записи файла.");
-        }
-    }
-
-    private String toString(Task task) {
-        if (task instanceof Subtask subtask) {
-            return String.format("%d,%s,%s,%s,%s,%d\n",
-                    subtask.getId(), TypeTask.SUBTASK, subtask.getNameTask(), subtask.getStatusTask(),
-                    subtask.getDescription(), subtask.getIdEpic());
-        } else if (task instanceof Epic epic) {
-            return String.format("%d,%s,%s,%s,%s\n",
-                    epic.getId(), TypeTask.EPIC, epic.getNameTask(), epic.getStatusTask(), epic.getDescription());
-        } else {
-            return String.format("%d,%s,%s,%s,%s\n",
-                    task.getId(), TypeTask.TASK, task.getNameTask(), task.getStatusTask(), task.getDescription());
         }
     }
 
