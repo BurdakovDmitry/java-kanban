@@ -1,9 +1,13 @@
+package Tasks;
+
+import Enum.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Epic extends Task {
-    List<Subtask> listSubtask;
+    public List<Subtask> listSubtask;
 
     public Epic(String nameTask, StatusTask statusTask, String description) {
         super(nameTask, statusTask, description);

@@ -1,8 +1,12 @@
+package Tasks;
+
+import Enum.*;
+
 public class Task {
-    private String nameTask;
-    private String description;
-    private int id;
-    private StatusTask statusTask;
+    protected String nameTask;
+    protected String description;
+    protected int id;
+    protected StatusTask statusTask;
 
     public Task(String nameTask, StatusTask statusTask, String description) {
         this.nameTask = nameTask;

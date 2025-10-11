@@ -1,3 +1,7 @@
+package Managers;
+
+import Interfases.*;
+
 public class Managers {
     public static TaskManager getDefault() {
         return new TaskImplimentation();

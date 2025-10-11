@@ -1,3 +1,7 @@
+package Tasks;
+
+import Enum.*;
+
 public class Subtask extends Task {
     private int idEpic;
 

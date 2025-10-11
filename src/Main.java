@@ -1,3 +1,8 @@
+import Enum.StatusTask;
+import Interfases.TaskManager;
+import Managers.Managers;
+import Tasks.*;
+
 public class Main {
 
     public static void main(String[] args) {

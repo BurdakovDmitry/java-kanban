@@ -1,3 +1,9 @@
+package Managers;
+
+import Exception.ManagerSaveException;
+import Enum.StatusTask;
+import Tasks.*;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -130,7 +136,7 @@ public class FileBackedTaskManager extends TaskImplimentation {
         }
     }
 
-    static FileBackedTaskManager loadFromFile(File file) {
+    public static FileBackedTaskManager loadFromFile(File file) {
         FileBackedTaskManager manager = new FileBackedTaskManager(file);
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file, StandardCharsets.UTF_8))) {

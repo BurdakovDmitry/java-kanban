@@ -1,3 +1,7 @@
+package Interfases;
+
+import Tasks.*;
+
 import java.util.List;
 
 public interface TaskManager {
