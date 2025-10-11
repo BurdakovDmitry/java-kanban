@@ -3,25 +3,25 @@ public class Main {
     public static void main(String[] args) {
         TaskManager manager = Managers.getDefault();
 
-        Task task1 = new Task("Переезд", "...");
+        Task task1 = new Task("Переезд", StatusTask.NEW, "...");
         manager.createTask(task1);
-        Task task2 = new Task("Сходить в магазин", "...");
+        Task task2 = new Task("Сходить в магазин", StatusTask.NEW, "...");
         manager.createTask(task2);
 
-        Epic epic1 = new Epic("Уборка дома", "...");
+        Epic epic1 = new Epic("Уборка дома", StatusTask.NEW, "...");
         manager.createEpic(epic1);
 
-        Subtask subtask1 = new Subtask("Помыть полы", "...");
+        Subtask subtask1 = new Subtask("Помыть полы", StatusTask.NEW, "...");
         subtask1.setIdEpic(epic1.getId());
         manager.createSubtask(subtask1);
-        Subtask subtask2 = new Subtask("Помыть окна", "...");
+        Subtask subtask2 = new Subtask("Помыть окна", StatusTask.NEW, "...");
         subtask2.setIdEpic(epic1.getId());
         manager.createSubtask(subtask2);
 
-        Epic epic2 = new Epic("Уборка улицы", "...");
+        Epic epic2 = new Epic("Уборка улицы", StatusTask.NEW, "...");
         manager.createEpic(epic2);
 
-        Subtask subtask3 = new Subtask("Подмести", "...");
+        Subtask subtask3 = new Subtask("Подмести", StatusTask.NEW, "...");
         subtask3.setIdEpic(epic2.getId());
         manager.createSubtask(subtask3);
 

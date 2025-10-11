@@ -2,11 +2,12 @@ public class Task {
     private String nameTask;
     private String description;
     private int id;
-    private StatusTask statusTask = StatusTask.NEW;
+    private StatusTask statusTask;
 
-    public Task(String nameTask, String description) {
+    public Task(String nameTask, StatusTask statusTask, String description) {
         this.nameTask = nameTask;
         this.description = description;
+        this.statusTask = statusTask;
     }
 
     public int getId() {
@@ -53,5 +54,10 @@ public class Task {
     @Override
     public int hashCode() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%d,%s,%s,%s,%s\n", id, TypeTask.TASK, nameTask, statusTask, description);
     }
 }

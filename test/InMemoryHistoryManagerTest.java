@@ -11,7 +11,7 @@ class InMemoryHistoryManagerTest {
 
     @Test
     void add() {
-        Task task = new Task("Task1", "Description1");
+        Task task = new Task("Task1", StatusTask.NEW, "Description1");
         taskManager.createTask(task);
 
         historyManager.add(task);
@@ -24,11 +24,11 @@ class InMemoryHistoryManagerTest {
 
     @Test
     void add2Task() {
-        Task task1 = new Task("Task1", "Description1");
+        Task task1 = new Task("Task1", StatusTask.NEW, "Description1");
         taskManager.createTask(task1);
         historyManager.add(task1);
 
-        Task task2 = new Task("Task2", "Description1");
+        Task task2 = new Task("Task2", StatusTask.NEW, "Description1");
         taskManager.createTask(task2);
         historyManager.add(task2);
 
@@ -41,10 +41,10 @@ class InMemoryHistoryManagerTest {
 
     @Test
     void UpdateTask1AfterAddingTask2() {
-        Task task1 = new Task("Task1", "Description1");
+        Task task1 = new Task("Task1", StatusTask.NEW, "Description1");
         taskManager.createTask(task1);
 
-        Task task2 = new Task("Task2", "Description1");
+        Task task2 = new Task("Task2", StatusTask.NEW, "Description1");
         taskManager.createTask(task2);
 
         historyManager.add(task1);
@@ -62,10 +62,10 @@ class InMemoryHistoryManagerTest {
 
     @Test
     void removeTaskById() {
-        Task task1 = new Task("Task1", "Description1");
+        Task task1 = new Task("Task1", StatusTask.NEW, "Description1");
         taskManager.createTask(task1);
 
-        Task task2 = new Task("Task2", "Description1");
+        Task task2 = new Task("Task2", StatusTask.NEW, "Description1");
         taskManager.createTask(task2);
 
         historyManager.add(task1);

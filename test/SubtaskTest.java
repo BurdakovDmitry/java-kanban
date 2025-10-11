@@ -10,10 +10,10 @@ class SubtaskTest {
 
     @Test
     void createNewSubtask() {
-        Epic epic = new Epic("Epic1", "Description1");
+        Epic epic = new Epic("Epic1", StatusTask.NEW, "Description1");
         taskManager.createEpic(epic);
 
-        Subtask subtask = new Subtask("Subtask1", "Description1");
+        Subtask subtask = new Subtask("Subtask1", StatusTask.NEW, "Description1");
         subtask.setIdEpic(epic.getId());
         taskManager.createSubtask(subtask);
 

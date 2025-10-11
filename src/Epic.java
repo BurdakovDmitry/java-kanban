@@ -5,8 +5,8 @@ import java.util.Objects;
 public class Epic extends Task {
     List<Subtask> listSubtask;
 
-    public Epic(String nameTask, String description) {
-        super(nameTask, description);
+    public Epic(String nameTask, StatusTask statusTask, String description) {
+        super(nameTask, statusTask, description);
         listSubtask = new ArrayList<>();
     }
 
@@ -44,5 +44,11 @@ public class Epic extends Task {
             }
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%d,%s,%s,%s,%s\n",
+                getId(), TypeTask.EPIC, getNameTask(), getStatusTask(), getDescription());
     }
 }
