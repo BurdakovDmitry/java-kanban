@@ -1,7 +1,7 @@
-import Interfases.TaskManager;
-import Managers.Managers;
-import Tasks.*;
-import Enum.StatusTask;
+import interfaces.TaskManager;
+import managers.Managers;
+import tasks.*;
+import enums.StatusTask;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;

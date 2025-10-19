@@ -1,6 +1,6 @@
-package Tasks;
+package tasks;
 
-import Enum.*;
+import enums.*;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -15,7 +15,7 @@ public class Subtask extends Task {
     }
 
     public Subtask(int id, String nameTask, StatusTask statusTask, String description,
-                LocalDateTime startTime, Duration duration, int idEpic) {
+                   LocalDateTime startTime, Duration duration, int idEpic) {
         super(id, nameTask, statusTask, description, startTime, duration);
         this.idEpic = idEpic;
         this.type = TypeTask.SUBTASK;

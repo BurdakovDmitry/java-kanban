@@ -1,9 +1,9 @@
-import Tasks.Task;
-import Exception.ManagerSaveException;
-import Exception.ManagerAddTaskException;
-import Enum.StatusTask;
-import Enum.TypeTask;
-import Managers.FileBackedTaskManager;
+import tasks.Task;
+import exceptions.ManagerSaveException;
+import exceptions.ManagerAddTaskException;
+import enums.StatusTask;
+import enums.TypeTask;
+import managers.FileBackedTaskManager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

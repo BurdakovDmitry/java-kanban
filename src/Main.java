@@ -1,7 +1,7 @@
-import Enum.StatusTask;
-import Interfases.TaskManager;
-import Managers.Managers;
-import Tasks.*;
+import enums.StatusTask;
+import interfaces.TaskManager;
+import managers.Managers;
+import tasks.*;
 
 public class Main {
 

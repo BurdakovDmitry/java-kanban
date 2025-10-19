@@ -1,6 +1,6 @@
-package Interfases;
+package interfaces;
 
-import Tasks.Task;
+import tasks.Task;
 
 import java.util.List;
 

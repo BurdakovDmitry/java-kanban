@@ -1,5 +1,5 @@
-import Interfases.*;
-import Managers.Managers;
+import interfaces.*;
+import managers.Managers;
 
 import org.junit.jupiter.api.Test;
 

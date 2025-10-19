@@ -1,6 +1,6 @@
-package Managers;
+package managers;
 
-import Interfases.*;
+import interfaces.*;
 
 public class Managers {
     public static TaskManager getDefault() {

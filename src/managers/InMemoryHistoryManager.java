@@ -1,7 +1,7 @@
-package Managers;
+package managers;
 
-import Interfases.HistoryManager;
-import Tasks.Task;
+import interfaces.HistoryManager;
+import tasks.Task;
 
 import java.util.Map;
 import java.util.HashMap;

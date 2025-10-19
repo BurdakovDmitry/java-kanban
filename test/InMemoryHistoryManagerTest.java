@@ -1,7 +1,7 @@
-import Interfases.*;
-import Managers.Managers;
-import Tasks.Task;
-import Enum.StatusTask;
+import interfaces.*;
+import managers.Managers;
+import tasks.Task;
+import enums.StatusTask;
 
 import org.junit.jupiter.api.Test;
 

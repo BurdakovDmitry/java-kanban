@@ -1,9 +1,9 @@
-package Managers;
+package managers;
 
-import Interfases.*;
-import Tasks.*;
-import Enum.TypeTask;
-import Exception.ManagerAddTaskException;
+import interfaces.*;
+import tasks.*;
+import enums.TypeTask;
+import exceptions.ManagerAddTaskException;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -149,7 +149,9 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public List<Task> getPrioritizedTasks() { return new ArrayList<>(sortedListByTime); }
+    public List<Task> getPrioritizedTasks() {
+        return new ArrayList<>(sortedListByTime);
+    }
 
     private void addTasks(Task task) {
 
@@ -200,7 +202,7 @@ public class InMemoryTaskManager implements TaskManager {
         return false;
     }
 
-    private boolean taskWithinTaskFromSet (Task task) {
+    private boolean taskWithinTaskFromSet(Task task) {
         for (Task taskFromSet : sortedListByTime) {
             if (task.getStartTime() != null) {
                 return task.getStartTime().isAfter(taskFromSet.getStartTime())
