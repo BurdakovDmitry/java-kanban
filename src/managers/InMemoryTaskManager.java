@@ -1,7 +1,10 @@
 package managers;
 
-import interfaces.*;
-import tasks.*;
+import interfaces.HistoryManager;
+import interfaces.TaskManager;
+import tasks.Task;
+import tasks.Subtask;
+import tasks.Epic;
 import enums.TypeTask;
 import exceptions.ManagerAddTaskException;
 
