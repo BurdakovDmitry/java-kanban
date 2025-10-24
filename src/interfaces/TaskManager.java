@@ -1,3 +1,9 @@
+package interfaces;
+
+import tasks.Task;
+import tasks.Subtask;
+import tasks.Epic;
+
 import java.util.List;
 
 public interface TaskManager {
@@ -38,4 +44,6 @@ public interface TaskManager {
     List<Subtask> getListSubtaskToEpic(int idEpic);
 
     List<Task> getHistory();
+
+    List<Task> getPrioritizedTasks();
 }

@@ -1,17 +1,27 @@
+import interfaces.TaskManager;
+import managers.Managers;
+import tasks.Task;
+import tasks.Subtask;
+import tasks.Epic;
+import enums.StatusTask;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class TaskImplimentationTest {
+class InMemoryTaskManagerTest {
     static TaskManager taskManager;
     static Task task;
     static Epic epic;
-    static Subtask subtask;
+    static Subtask subtask1;
 
     @BeforeAll
     static void beforeAll() {
@@ -22,16 +32,16 @@ class TaskImplimentationTest {
         epic = new Epic("Epic1", StatusTask.NEW, "Description1");
         taskManager.createEpic(epic);
 
-        subtask = new Subtask("Subtask1", StatusTask.NEW, "Description1");
-        subtask.setIdEpic(epic.getId());
-        taskManager.createSubtask(subtask);
+        subtask1 = new Subtask("Subtask1", StatusTask.NEW, "Description1");
+        subtask1.setIdEpic(epic.getId());
+        taskManager.createSubtask(subtask1);
     }
 
     @Test
     void equalityId() {
         assertEquals(1, task.getId(), "Id не равны");
         assertEquals(2, epic.getId(), "Id не равны");
-        assertEquals(3, subtask.getId(), "Id не равны");
+        assertEquals(3, subtask1.getId(), "Id не равны");
     }
 
     @Test
@@ -48,20 +58,20 @@ class TaskImplimentationTest {
 
     @Test
     void updateSubtask() {
-        subtask.setNameTask("Subtask1.0");
-        subtask.setDescription("Description1.0");
-        subtask.setStatusTask(StatusTask.IN_PROGRESS);
-        taskManager.updateSubtask(subtask);
+        subtask1.setNameTask("Subtask1.0");
+        subtask1.setDescription("Description1.0");
+        subtask1.setStatusTask(StatusTask.IN_PROGRESS);
+        taskManager.updateSubtask(subtask1);
 
-        assertEquals("Subtask1.0", subtask.getNameTask(), "Имя не обновилось");
-        assertEquals("Description1.0", subtask.getDescription(), "Описание не обновилось");
-        assertEquals(StatusTask.IN_PROGRESS, subtask.getStatusTask(), "Статусы не совпадают");
+        assertEquals("Subtask1.0", subtask1.getNameTask(), "Имя не обновилось");
+        assertEquals("Description1.0", subtask1.getDescription(), "Описание не обновилось");
+        assertEquals(StatusTask.IN_PROGRESS, subtask1.getStatusTask(), "Статусы не совпадают");
     }
 
     @Test
     void updateEpic() {
-        subtask.setStatusTask(StatusTask.IN_PROGRESS);
-        taskManager.updateSubtask(subtask);
+        subtask1.setStatusTask(StatusTask.IN_PROGRESS);
+        taskManager.updateSubtask(subtask1);
 
         epic.setNameTask("Epic1.0");
         epic.setDescription("Description1.0");
@@ -88,7 +98,7 @@ class TaskImplimentationTest {
 
     @Test
     void removeSubtaskById() {
-        Subtask subtask2 = new Subtask("Subtask2", StatusTask.NEW, "Description1");
+        Subtask subtask2 = new Subtask("Subtask2", StatusTask.NEW, "Description2");
         subtask2.setIdEpic(epic.getId());
         taskManager.createSubtask(subtask2);
 
@@ -103,11 +113,12 @@ class TaskImplimentationTest {
 
     @Test
     void removeEpicById() {
-        Epic epic2 = new Epic("Epic2", StatusTask.NEW, "Description1");
+        Epic epic2 = new Epic("Epic2", StatusTask.NEW, "Description2");
         taskManager.createEpic(epic2);
 
-        Subtask subtask3 = new Subtask("Subtask2", StatusTask.NEW, "Description1");
+        Subtask subtask3 = new Subtask("Subtask3", StatusTask.NEW, "Description3");
         subtask3.setIdEpic(epic2.getId());
+        subtask3.setStartTime(LocalDateTime.of(2025,10,5,12,30));
         taskManager.createSubtask(subtask3);
 
         final List<Epic> epics1 = taskManager.getListEpic();
@@ -129,8 +140,47 @@ class TaskImplimentationTest {
     void getListSubtaskToEpic() {
         final List<Subtask> subtasks = taskManager.getListSubtaskToEpic(epic.getId());
 
-        assertNotNull(subtasks, "В списке должна бить задача");
-        assertEquals(1, subtasks.size(),"В списке должна бить 1 задача");
+        assertNotNull(subtasks, "В списке должна быть задача");
+        assertEquals(1, subtasks.size(),"В списке должна быть 1 задача");
+    }
+
+    @Test
+    void getPrioritizedTaskElseNullTime() {
+        final List<Task> sortedList = taskManager.getPrioritizedTasks();
+
+        assertEquals(0, sortedList.size(), "Список должен быть пуст");
+    }
+
+    @Test
+    void getPrioritizedOneTask() {
+        task.setDuration(Duration.ofMinutes(60));
+        task.setStartTime(LocalDateTime.of(2025,10,10,12,30));
+        taskManager.updateTask(task);
+
+        final List<Task> sortedList = taskManager.getPrioritizedTasks();
+
+        assertFalse(sortedList.isEmpty(), "Список не должен быть пуст");
+        assertEquals(1, sortedList.size(),"В списке должна быть 1 задача");
+    }
+
+    @Test
+    void getPrioritizedTasks() {
+        subtask1.setDuration(Duration.ofMinutes(60));
+        subtask1.setStartTime(LocalDateTime.of(2025,10,5,12,30));
+        taskManager.updateSubtask(subtask1);
+
+        final List<Task> sortedList = taskManager.getPrioritizedTasks();
+
+        assertFalse(sortedList.isEmpty(), "Список не должен быть пуст");
+        assertEquals(2, sortedList.size(),"В списке должно быть 2 задачи");
+
+        final Task newSubtask = sortedList.getFirst();
+        final Task newTask = sortedList.getLast();
+
+        assertEquals("12:30 05.10.2025", newSubtask.getStartTime().format(TaskTest.formatter),
+                "Дата и время начала задачи должны совпадать");
+        assertEquals("12:30 10.10.2025", newTask.getStartTime().format(TaskTest.formatter),
+                "Дата и время начала задачи должны совпадать");
     }
 
     @AfterAll

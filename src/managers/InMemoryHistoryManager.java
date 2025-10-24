@@ -1,3 +1,8 @@
+package managers;
+
+import interfaces.HistoryManager;
+import tasks.Task;
+
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
