@@ -1,3 +1,5 @@
+import interfaces.TaskManager;
+import managers.Managers;
 import tasks.Task;
 import exceptions.ManagerSaveException;
 import exceptions.ManagerAddTaskException;
@@ -37,7 +39,7 @@ class FileBackedTaskManagerTest {
 
     @Test
     void loadingEmptyFile() {
-        FileBackedTaskManager manager = FileBackedTaskManager.loadFromFile(file);
+        TaskManager manager = FileBackedTaskManager.loadFromFile(file);
 
         assertNotNull(manager, "Менеджер должен быть проинициализирован");
         assertTrue(file.exists(), "Файл должен быть создан");
@@ -46,7 +48,7 @@ class FileBackedTaskManagerTest {
 
     @Test
     void savingTaskFile() throws IOException {
-        FileBackedTaskManager manager = new FileBackedTaskManager(file);
+        TaskManager manager = Managers.getDefault(file);
 
         assertTrue(file.exists(), "Файл должен быть создан");
         assertEquals(0, file.length(), "Файл должен быть пустым");
@@ -60,12 +62,12 @@ class FileBackedTaskManagerTest {
 
     @Test
     void loadingTaskFile() {
-        FileBackedTaskManager manager = new FileBackedTaskManager(file);
+        TaskManager manager = Managers.getDefault(file);
         task.setDuration(Duration.ofMinutes(60));
         task.setStartTime(LocalDateTime.of(2025, 10, 10, 12, 30));
         manager.createTask(task);
 
-        FileBackedTaskManager newManager = FileBackedTaskManager.loadFromFile(file);
+        TaskManager newManager = FileBackedTaskManager.loadFromFile(file);
         final List<Task> listTask = newManager.getListTask();
 
         assertNotNull(listTask, "Список не должен быть пустым");
@@ -87,11 +89,11 @@ class FileBackedTaskManagerTest {
 
     @Test
     void loadingTaskFileElseNullTime() {
-        FileBackedTaskManager manager = new FileBackedTaskManager(file);
+        TaskManager manager = Managers.getDefault(file);
         task.setStartTime(null);
         manager.createTask(task);
 
-        FileBackedTaskManager newManager = FileBackedTaskManager.loadFromFile(file);
+        TaskManager newManager = FileBackedTaskManager.loadFromFile(file);
         final List<Task> listTask = newManager.getListTask();
 
         assertNotNull(listTask, "Список не должен быть пустым");
@@ -111,7 +113,7 @@ class FileBackedTaskManagerTest {
 
     @Test
     void crossingTime() {
-        FileBackedTaskManager manager = FileBackedTaskManager.loadFromFile(file);
+        TaskManager manager = FileBackedTaskManager.loadFromFile(file);
 
         Task task1 = new Task("Task1", StatusTask.NEW, "Description1");
         task1.setDuration(Duration.ofMinutes(60));
