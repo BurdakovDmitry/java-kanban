@@ -244,19 +244,19 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
             System.out.println("id - " + value.getId() + ";  timeStart - " + value.getStartTime());
         }
 
-        TaskManager manager1 = loadFromFile(file);
+        TaskManager fileBackedTaskManager = loadFromFile(file);
 
-        for (Task task : manager1.getListTask()) {
+        for (Task task : fileBackedTaskManager.getListTask()) {
             System.out.println("Задача: id = " + task.getId() + "; название = " + task.getNameTask() +
                     "; Время начала: " + task.getStartTime() + " Длительность: " + task.getDuration());
         }
 
-        for (Task task : manager1.getListEpic()) {
+        for (Task task : fileBackedTaskManager.getListEpic()) {
             System.out.println("Эпик: id = " + task.getId() + "; название = " + task.getNameTask() +
                     "; Время начала: " + task.getStartTime() + " Длительность: " + task.getDuration());
         }
 
-        for (Task task : manager1.getListSubtask()) {
+        for (Task task : fileBackedTaskManager.getListSubtask()) {
             System.out.println("Подзадача: id = " + task.getId() + "; название = " + task.getNameTask() +
                     "; Время начала: " + task.getStartTime() + " Длительность: " + task.getDuration());
         }

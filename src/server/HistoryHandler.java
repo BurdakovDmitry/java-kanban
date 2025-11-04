@@ -28,6 +28,12 @@ public class HistoryHandler extends BaseHttpHandler implements HttpHandler {
     public void handle(HttpExchange exchange) throws IOException {
         String pathParts = exchange.getRequestURI().getPath();
         String method = exchange.getRequestMethod();
+
+        if (pathParts == null) {
+            sendNotFound(exchange);
+            return;
+        }
+
         if (method.equals("GET") && pathParts.equals("/history")) {
             if (manager.getHistory().isEmpty()) {
                 sendNotFound(exchange);

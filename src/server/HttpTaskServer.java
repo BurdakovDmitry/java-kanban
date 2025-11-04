@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.Scanner;
 
 public class HttpTaskServer {
     private static final int PORT = 8080;
@@ -45,7 +46,11 @@ public class HttpTaskServer {
     }
 
     public static void main(String[] args) throws IOException {
-        File file = new File("D:\\Java\\Yandex.practicum\\Sprint7\\saveTask.txt");
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Введите абсолютный путь к файлу");
+
+        File file = new File(scanner.nextLine());
         TaskManager manager = FileBackedTaskManager.loadFromFile(file);
         HttpTaskServer server = new HttpTaskServer(manager);
         server.start();

@@ -13,7 +13,6 @@ import tasks.Task;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -37,22 +36,25 @@ public class PrioritizedHandler  extends BaseHttpHandler implements HttpHandler 
         String pathParts = exchange.getRequestURI().getPath();
         String method = exchange.getRequestMethod();
 
+        if (pathParts == null) {
+            sendNotFound(exchange);
+            return;
+        }
+
         if (method.equals("GET") && pathParts.equals("/prioritized")) {
-            List<Task> list = new ArrayList<>();
+            List<Task> listLoad = loadPrioritizedTasks();
 
-            if (manager.getPrioritizedTasks().isEmpty()) {
-                list = loadPrioritizedTasks();
-            } else {
-                String body = gson.toJson(manager.getPrioritizedTasks());
-                sendText(exchange, body);
-            }
-
-            if (list.isEmpty()) {
-                sendNotFound(exchange);
+            if (listLoad.isEmpty()) {
+                if (!manager.getPrioritizedTasks().isEmpty()) {
+                    String body = gson.toJson(manager.getPrioritizedTasks());
+                    sendText(exchange, body);
+                } else {
+                    sendNotFound(exchange);
+                }
                 return;
             }
 
-            String body = gson.toJson(list);
+            String body = gson.toJson(listLoad);
             sendText(exchange, body);
         } else {
             sendHasOverlaps(exchange);
