@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class Epic extends Task {
-    private final TypeTask type;
     public List<Subtask> listSubtask;
 
     public Epic(String nameTask, StatusTask statusTask, String description) {
@@ -19,8 +18,9 @@ public class Epic extends Task {
         this.type = TypeTask.EPIC;
     }
 
-    public Epic(int id, String nameTask, StatusTask statusTask, String description) {
-        super(nameTask, statusTask, description);
+    public Epic(int id, String nameTask, StatusTask statusTask, String description,
+                LocalDateTime startTime, Duration duration) {
+        super(nameTask, statusTask, description, startTime, duration);
         this.id = id;
         listSubtask = new ArrayList<>();
         this.type = TypeTask.EPIC;
@@ -32,12 +32,12 @@ public class Epic extends Task {
 
     @Override
     public TypeTask getType() {
-        return type;
+        return TypeTask.EPIC;
     }
 
     @Override
     public LocalDateTime getStartTime() {
-        LocalDateTime startTime = LocalDateTime.MAX;
+        startTime = LocalDateTime.MAX;
 
         for (Subtask subtask : listSubtask) {
             if (subtask.getStartTime() != null) {
@@ -56,7 +56,7 @@ public class Epic extends Task {
 
     @Override
     public Duration getDuration() {
-        Duration duration = Duration.ofMinutes(0);
+        duration = Duration.ofMinutes(0);
 
         for (Subtask subtask : listSubtask) {
             if (subtask.getDuration() != null) {
@@ -119,7 +119,21 @@ public class Epic extends Task {
 
     @Override
     public String toString() {
+        return "Epic{" +
+                "listSubtask=" + listSubtask +
+                ", id=" + id +
+                ", type=" + getType() +
+                ", nameTask='" + nameTask + '\'' +
+                ", description='" + description + '\'' +
+                ", statusTask=" + statusTask +
+                ", duration=" + formaterDuration(duration) +
+                ", startTime=" + formaterDateTime(startTime) +
+                '}';
+    }
+
+    @Override
+    public String toStringFormatSaveFile() {
         return String.format("%s,%s,%s,%s,%s,%s,%s\n", getId(), getType(), getNameTask(), getStatusTask(),
-                getDescription(), formaterDateTime(getStartTime(), dateTimeFormatter), getDuration().toMinutes());
+                getDescription(), formaterDateTime(getStartTime()), formaterDuration(getDuration()));
     }
 }

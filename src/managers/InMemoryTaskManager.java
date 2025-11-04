@@ -69,17 +69,26 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public List<Task> getListTask() {
-        return new ArrayList<>(tasks.values());
+        if (!tasks.isEmpty()) {
+            return new ArrayList<>(tasks.values());
+        }
+        return new ArrayList<>();
     }
 
     @Override
     public List<Epic> getListEpic() {
-        return new ArrayList<>(epics.values());
+        if (!epics.isEmpty()) {
+            return new ArrayList<>(epics.values());
+        }
+        return new ArrayList<>();
     }
 
     @Override
     public List<Subtask> getListSubtask() {
-        return new ArrayList<>(subtasks.values());
+        if (!subtasks.isEmpty()) {
+            return new ArrayList<>(subtasks.values());
+        }
+        return new ArrayList<>();
     }
 
     @Override
@@ -153,7 +162,10 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public List<Task> getPrioritizedTasks() {
-        return new ArrayList<>(sortedListByTime);
+        if (!sortedListByTime.isEmpty()) {
+            return new ArrayList<>(sortedListByTime);
+        }
+        return new ArrayList<>();
     }
 
     private void addTasks(Task task) {

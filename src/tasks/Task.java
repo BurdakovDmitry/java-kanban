@@ -8,19 +8,28 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Task {
-    private final TypeTask type;
+    protected int id;
+    protected TypeTask type;
     protected String nameTask;
     protected String description;
-    protected int id;
     protected StatusTask statusTask;
     protected Duration duration;
     protected LocalDateTime startTime;
-    protected DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm dd.MM.yyyy");
 
     public Task(String nameTask, StatusTask statusTask, String description) {
         this.nameTask = nameTask;
         this.description = description;
         this.statusTask = statusTask;
+        this.type = TypeTask.TASK;
+    }
+
+    public Task(String nameTask, StatusTask statusTask, String description,
+                LocalDateTime startTime, Duration duration) {
+        this.nameTask = nameTask;
+        this.description = description;
+        this.statusTask = statusTask;
+        this.startTime = startTime;
+        this.duration = duration;
         this.type = TypeTask.TASK;
     }
 
@@ -88,19 +97,28 @@ public class Task {
     }
 
     public LocalDateTime getEndTime() {
-        if (startTime != null) {
+        if (startTime != null && duration != null) {
             return startTime.plusMinutes(duration.toMinutes());
         } else {
             return null;
         }
     }
 
-    public String formaterDateTime(LocalDateTime time, DateTimeFormatter formatter) {
+    public String formaterDateTime(LocalDateTime time) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm dd.MM.yyyy");
         if (time == null) {
             return null;
         } else {
-            return time.format(formatter);
+            return time.format(dtf);
         }
+    }
+
+    public long formaterDuration(Duration duration) {
+        if (duration == null) {
+            return 0;
+        }
+
+        return duration.toMinutes();
     }
 
     @Override
@@ -119,8 +137,20 @@ public class Task {
 
     @Override
     public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", type=" + type +
+                ", nameTask='" + nameTask + '\'' +
+                ", description='" + description + '\'' +
+                ", statusTask=" + statusTask +
+                ", duration=" + formaterDuration(duration) +
+                ", startTime=" + formaterDateTime(startTime) +
+                '}';
+    }
+
+    public String toStringFormatSaveFile() {
         return String.format("%s,%s,%s,%s,%s,%s,%s\n",
                 id, type, nameTask, statusTask, description,
-                formaterDateTime(startTime, dateTimeFormatter), duration.toMinutes());
+                formaterDateTime(startTime), formaterDuration(duration));
     }
 }
